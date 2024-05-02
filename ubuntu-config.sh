@@ -10,13 +10,15 @@ user=$(whoami)
 sudo apt-get update && sudo apt-get upgrade -y
 
 # Set the profile picture
-# I need to download the image to /home/$user/Downloads/$profile_image_name
+wget https://raw.githubusercontent.com/jromero132/ubuntu-config/master/resources/images/$profile_image_name \
+    -P /home/$user/Downloads
 sudo cp /home/$user/Downloads/$profile_image_name /var/lib/AccountsService/icons/$user
 sudo sed -i -e "s/Icon=.*/Icon=\/var\/lib\/AccountsService\/icons\/$user/g" "/var/lib/AccountsService/users/$user"
 rm /home/$user/Downloads/$profile_image_name
 
-# Set the background image
-# I need to download the image to /home/$user/Downloads/$wallpaper_image_name
+# # Set the background image
+wget https://raw.githubusercontent.com/jromero132/ubuntu-config/master/resources/images/$wallpaper_image_name \
+    -P /home/$user/Downloads
 cp ./resources/images/$wallpaper_image_name /home/$user/Downloads/$wallpaper_image_name
 gsettings set org.gnome.desktop.background picture-uri "file:///home/$user/Downloads/$wallpaper_image_name"
 
